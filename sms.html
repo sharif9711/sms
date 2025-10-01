@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>다중 문자 발송 + QR코드</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      padding: 30px;
+      width: 400px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    input:focus, textarea:focus {
+      border-color: #6a82fb;
+      outline: none;
+      box-shadow: 0 0 5px rgba(106,130,251,0.5);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+    ul li {
+      background: #f4f4f4;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    button {
+      background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+      border: none;
+      padding: 12px 20px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: transform 0.2s ease-in-out;
+      width: 100%;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    #qrcode {
+      margin-top: 20px;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>📩 문자 보내기 + QR코드</h2>
+    <input type="tel" id="phoneInput" placeholder="전화번호 입력 후 엔터">
+    <ul id="phoneList"></ul>
+    <textarea id="message" rows="4" placeholder="메시지를 입력하세요"></textarea>
+    <button onclick="generateSMS()">문자 앱 열기 & QR코드 생성</button>
+    <div id="qrcode"></div>
+  </div>
+
+  <script>
+    const phoneInput = document.getElementById("phoneInput");
+    const phoneList = document.getElementById("phoneList");
+    const phones = [];
+
+    // 엔터 입력 시 전화번호 추가
+    phoneInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const num = phoneInput.value.trim();
+        if (num && !phones.includes(num)) {
+          phones.push(num);
+          const li = document.createElement("li");
+          li.textContent = num;
+          phoneList.appendChild(li);
+          phoneInput.value = "";
+        }
+      }
+    });
+
+    function generateSMS() {
+      const message = document.getElementById("message").value.trim();
+      if (phones.length === 0) {
+        alert("전화번호를 하나 이상 입력하세요!");
+        return;
+      }
+
+      const phoneStr = phones.join(",");
+      const smsLink = `sms:${phoneStr}?body=${encodeURIComponent(message)}`;
+
+      // 모바일이면 문자 앱 열기
+      window.location.href = smsLink;
+
+      // QR코드 생성
+      document.getElementById("qrcode").innerHTML = "";
+      new QRCode(document.getElementById("qrcode"), {
+        text: smsLink,
+        width: 200,
+        height: 200,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+    }
+  </script>
+</body>
+</html>
