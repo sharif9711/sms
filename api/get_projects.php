@@ -1,6 +1,6 @@
 <?php
 define('_GNUBOARD_', true);
-include_once '../../../common.php';
+include_once '../../common.php';  // ✅ 수정
 header('Content-Type: application/json; charset=utf-8');
 
 if (!$is_member) {
