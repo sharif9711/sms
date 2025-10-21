@@ -1,7 +1,4 @@
 <?php
-if (!defined('_GNUBOARD_')) {
-    define('_GNUBOARD_', true);
-}
 include_once '../../common.php';
 header('Content-Type: application/json; charset=utf-8');
 
@@ -32,10 +29,14 @@ echo json_encode([
 
 ---
 
-## 📤 업로드 및 재테스트
+## 📤 업로드
 
-### 1️⃣ 4개 파일 모두 재업로드
+4개 파일을 모두 다시 업로드하세요!
 
-### 2️⃣ auth.php 테스트 (시크릿 모드)
+---
+
+## 🧪 테스트
+
+### 1️⃣ 시크릿 모드에서 테스트
 ```
 https://ftpsharif.dothome.co.kr/map/api/auth.php
