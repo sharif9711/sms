@@ -1,7 +1,4 @@
 <?php
-if (!defined('_GNUBOARD_')) {
-    define('_GNUBOARD_', true);
-}
 include_once '../../common.php';
 header('Content-Type: application/json; charset=utf-8');
 
