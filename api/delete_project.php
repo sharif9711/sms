@@ -1,6 +1,6 @@
 <?php
 define('_GNUBOARD_', true);
-include_once '../../../common.php';
+include_once '../../common.php';  // ✅ 수정
 header('Content-Type: application/json; charset=utf-8');
 
 if (!$is_member) {
@@ -30,8 +30,14 @@ echo json_encode([
 
 ---
 
-### 3️⃣ **파일 업로드 완료 후 확인**
+## 📤 업로드 및 테스트
 
-브라우저에서 직접 테스트:
+### 1️⃣ **4개 파일 모두 재업로드**
+
+수정한 파일들을 FTP로 `/html/map/api/` 폴더에 덮어쓰기 하세요.
+
+### 2️⃣ **auth.php 테스트**
+
+브라우저에서:
 ```
 https://ftpsharif.dothome.co.kr/html/map/api/auth.php
