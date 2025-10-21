@@ -1,8 +1,10 @@
 <?php
-// 그누보드 경로 설정
-define('_GNUBOARD_', true);
+// ✅ 이미 정의되어 있지 않을 때만 정의
+if (!defined('_GNUBOARD_')) {
+    define('_GNUBOARD_', true);
+}
 
-// ✅ 경로 수정: ../../../ → ../../
+// 그누보드 common.php 로드
 include_once '../../common.php';
 
 header('Content-Type: application/json; charset=utf-8');
