@@ -2,8 +2,8 @@
 // 그누보드 경로 설정
 define('_GNUBOARD_', true);
 
-// 그누보드 common.php 로드 (경로 조정)
-include_once '../../../common.php';
+// ✅ 경로 수정: ../../../ → ../../
+include_once '../../common.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
