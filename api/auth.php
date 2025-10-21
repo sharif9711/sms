@@ -1,9 +1,4 @@
 <?php
-// ✅ 이미 정의되어 있지 않을 때만 정의
-if (!defined('_GNUBOARD_')) {
-    define('_GNUBOARD_', true);
-}
-
 // 그누보드 common.php 로드
 include_once '../../common.php';
 
